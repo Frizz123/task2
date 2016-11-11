@@ -14,6 +14,27 @@ app.get('/task2A', (req, res) => {
     res.send(sum.toString());
 });
 
+app.get('/task2B', (req, res) => {
+    const fullname = req.query.fullname;
+    var parts = fullname.split(' ');
+    var partsLenght = parts.length;
+    var resp = 'Invalid fullname';
+    if(partsLenght<4 && fullname.length>0) {
+        switch(partsLenght) {
+            case 1:
+                resp = parts[0];
+                break
+            case 2:
+                resp = parts[partsLenght - 1] + ' ' + parts[0].substr(0, 1) + '.';
+                break
+            case 3:
+                resp = parts[partsLenght - 1] + ' ' + parts[0].substr(0, 1) + '.' + ' ' + parts[1].substr(0, 1) + '.';
+                break
+        }
+    }
+    res.send(resp.toString());
+});
+
 app.listen(3000, () => {
   console.log('Your app listening on port 3000!');
 });
